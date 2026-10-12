@@ -30,7 +30,7 @@ export interface SearchResult {
 export interface FileReference {
   id: string;
   name: string;
-  type: 'pdf' | 'csv' | 'excel' | 'doc';
+  type: 'pdf' | 'csv' | 'excel' | 'doc' | 'md';
   content: string;
 }
 
