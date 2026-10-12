@@ -137,6 +137,9 @@ export function FileProcessor({ onFileProcessed, onClose, existingFileNames, cha
         case 'doc':
           setProcessingStatus(t('extractingTextFromWord'));
           break;
+        case 'md':
+          setProcessingStatus(t('processingFile'));
+          break;
         default:
           setProcessingStatus(t('processingFile'));
       }
@@ -230,7 +233,7 @@ export function FileProcessor({ onFileProcessed, onClose, existingFileNames, cha
           <input
             type="file"
             onChange={handleFileInput}
-            accept=".pdf,.csv,.xlsx,.xls,.docx,.doc,.txt"
+            accept=".pdf,.csv,.xlsx,.xls,.docx,.doc,.txt,.md,.markdown"
             className="hidden"
             id="file-input"
           />

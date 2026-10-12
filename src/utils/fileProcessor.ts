@@ -110,6 +110,15 @@ export async function extractTextFromFile(file: File): Promise<string> {
   const fileName = file.name.toLowerCase();
 
   try {
+    // Markdown files
+    if (fileType.includes('markdown') || fileName.endsWith('.md') || fileName.endsWith('.markdown')) {
+      const content = await file.text();
+      if (!content || content.trim().length < 1) {
+        throw new Error('Markdown file is empty');
+      }
+      return content;
+    }
+
     // Text files - extract real content
     if (fileType.includes('text') || fileName.endsWith('.txt')) {
       const content = await file.text();
@@ -161,13 +170,14 @@ export async function extractTextFromFile(file: File): Promise<string> {
   }
 }
 
-export function getFileTypeFromName(fileName: string): 'pdf' | 'csv' | 'excel' | 'doc' {
+export function getFileTypeFromName(fileName: string): 'pdf' | 'csv' | 'excel' | 'doc' | 'md' {
   const name = fileName.toLowerCase();
   
   if (name.endsWith('.pdf')) return 'pdf';
   if (name.endsWith('.csv')) return 'csv';
   if (name.endsWith('.xlsx') || name.endsWith('.xls')) return 'excel';
   if (name.endsWith('.docx') || name.endsWith('.doc')) return 'doc';
+  if (name.endsWith('.md') || name.endsWith('.markdown')) return 'md';
   
   return 'doc'; // Default fallback
 } 
